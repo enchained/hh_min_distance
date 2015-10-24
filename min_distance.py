@@ -1,4 +1,5 @@
 import sys
+import math
 
 
 def min_dist(pts):
@@ -9,7 +10,15 @@ def min_dist(pts):
     ---
     returns: minimum distance
     """
-    pass
+    min_d = float('inf')  # infinity
+
+    for p in pts:
+        for q in pts:
+            if not (p is q):
+                dist = math.hypot(q[0] - p[0], q[1] - p[1])
+                if dist < min_d:
+                    min_d = dist
+    return min_d
 
 
 def main(lines):
@@ -22,12 +31,18 @@ def main(lines):
         print "No points were provided"
         return
 
-    dist = min_dist(points)
+    min_d = min_dist(points)
+
+    # string formatting for print
+    if min_d.is_integer():
+        print_d = str(int(min_d))
+    else:
+        print_d = "{0:.2f}".format(min_d)
 
     # print solution
     for p in points:
         print p
-    print "Minimum distance between points is " + str(dist)
+    print "Minimum distance between points is " + print_d
 
 
 if __name__ == '__main__':
