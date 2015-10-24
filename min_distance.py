@@ -15,10 +15,15 @@ def min_dist(pts):
     for p in pts:
         for q in pts:
             if not (p is q):
-                dist = math.hypot(q[0] - p[0], q[1] - p[1])
+                dist = distance(p, q)
                 if dist < min_d:
                     min_d = dist
     return min_d
+
+
+def distance(p, q):
+    # distance between 2 points
+    return math.hypot(q[0] - p[0], q[1] - p[1])
 
 
 def main(lines):
