@@ -5,11 +5,14 @@ from operator import itemgetter
 
 def min_dist(pts):
     """
-    pts: list of points as tuples with 2 integer coordinates each
-    ---
-    This function finds min distance between 2 points from provided set.
-    ---
-    returns: minimum distance
+    Find minimum distance between 2 points from provided set,
+    using divide and conguer algorithm based on:
+    https://en.wikipedia.org/wiki/Closest_pair_of_points_problem
+
+    Args:
+        pts (list): list of points as tuples with 2 integer coordinates each.
+    Returns:
+        min_d (float): minimum distance between closest pair of points.
     """
     # Sort point sets by x and y values
     ptsX = sorted(pts, key=itemgetter(0))
@@ -21,7 +24,7 @@ def min_dist(pts):
 
 
 def distance(p, q):
-    # distance between 2 points
+    # Returns distance between 2 points as float.
     return math.hypot(q[0] - p[0], q[1] - p[1])
 
 
@@ -109,7 +112,7 @@ def min_candidates(pts, d):
 
 def main(lines):
     points = []
-    # read points
+    # Read points
     for line in lines:
         tup = tuple(int(n) for n in line.strip().split())
         points.append(tup)
@@ -119,20 +122,20 @@ def main(lines):
 
     min_d = min_dist(points)
 
-    # string formatting for print
+    # String formatting for print
     if min_d.is_integer():
         print_d = str(int(min_d))
     else:
         print_d = "{0:.2f}".format(min_d)
 
-    # print solution
+    # Print solution
     for p in points:
         print p
     print "Minimum distance between points is " + print_d
 
 
 if __name__ == '__main__':
-    # read file
+    # Read file
     if len(sys.argv) > 1:
         try:
             filename = sys.argv[1]
@@ -140,7 +143,7 @@ if __name__ == '__main__':
                 lines = input_file.readlines()
                 main(lines)
         except IOError as e:
-            # in case no such file exist
+            # In case no such file exist
             print "I/O error({0}): {1}".format(e.errno, e.strerror)
     else:
         print "Error: input file was not provided"
